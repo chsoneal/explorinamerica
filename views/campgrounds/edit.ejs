@@ -1,0 +1,105 @@
+<%layout('layouts/boilerplate.ejs')%>
+<div id="map" style="width: 100%; height: 300px"></div>
+
+<div class="row">
+    <h1 class="text-center">Edit <%=campground.title%></h1>
+        
+    <div class="col-6 offset-3">
+    <form action="/campgrounds/<%=campground._id%>?_method=PUT" enctype="multipart/form-data" method="POST" novalidate class="validated-form">
+        <div class="mb-3">
+            <label class="form-label" for="title">Title</label>
+            <input class="form-control" type="text" id="title" name="campground[title]" value="<%=campground.title%>" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="longitude">Longitude</label>
+            <input class="form-control" type="text" id="longitude" value="<%=campground.geometry.coordinates[0]%>" name="longitude" >
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="latitude">Latitude</label>
+            <input class="form-control" type="text" id="latitude" value="<%=campground.geometry.coordinates[1]%>" name="latitude" >
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="city">City</label>
+            <input class="form-control" type="text" id="city" value="<%=campground.city%>" name="campground[city]" >
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="state">State</label>
+            <input class="form-control" type="text" value="<%=campground.state%>" id="state" name="campground[state]" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="country">Country</label>
+            <input class="form-control" type="text" value="<%=campground.country%>" id="country" name="campground[country]" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="dump_station">Dump Station on Site?</label>
+            <input class="form-control" type="text" value="<%=campground.dump_station%>" id="dump_station" name="campground[dump_station]" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="potable_water">Potable Water on Site?</label>
+            <input class="form-control" type="text" value="<%=campground.potable_water%>" id="potable_water" name="campground[potable_water]" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="type">Type</label>
+            <input class="form-control" type="text" id="type" name="campground[type]" value="<%=campground.type%>" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="website">Website</label>
+            <input class="form-control" type="text" id="website" name="campground[website]" value="<%=campground.website%>" required>
+        </div>
+
+       <div class="input-group mb-3">
+        <input type="file" name="images" id="images" multiple class="form-control">        
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <input class="form-control" type="text" id="description" rows="10" cols="40" name="campground[description]" value="<%=campground.description%>" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="price">Price</label>
+            <div class="input-group">
+            <span class="input-group-text" id="price-label">$</span>
+            <input type="text" class="form-control" id="price" placeholder="0.00" name="campground[price]" value="<%=campground.price%>" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <% campground.images.forEach(function(img, i) { %>
+                <img src="<%=img.thumbnail%>" class="img-thumbnail">
+                <div class="form-check-inline">
+                <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                <label for="image-<%=i%>">Delete?</label>
+                </div>
+            <%})%>
+        </div>
+    
+            
+        </div>
+        <button class="btn-success"> Update Campground</button>
+    </form>
+    <a href="/campgrounds/id/<%=campground._id%>">Back to Campground</a>
+</div>
+</div>
+
+ <script>
+    const mapToken = '<%-process.env.MAPBOX_PUBLIC_TOKEN %>';
+    const campgrounds = {features: <%-JSON.stringify(campgrounds)%>};
+    const campground = {features: <%-JSON.stringify(campground)%>}
+    </script>
+<script>
+        function getCampgrounds(e){
+            let filter = JSON.stringify({payload: e.value})
+        }
+</script>
+    <script src="/javascripts/editlocation.js"></script>
+    

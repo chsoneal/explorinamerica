@@ -1,0 +1,67 @@
+<%layout('layouts/boilerplate.ejs')%>
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds/new" method="POST" enctype="multipart/form-data" class="validated-form">
+        <div class="mb-3">
+            <label class="form-label" for="title">Title</label>
+            <input class="form-control" type="text" id="title" name="campground[title]" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="type">Type</label>
+            <input class="form-control"type="text" id="type" name="campground[type]" required>
+        </div>
+
+       <div class="mb-3" id="category_div">
+        <label class="form-label" for="country">Country</label>
+        <select class="form-control" name="campground[country]" id="country" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);">
+        <option value="">Select Country</option>
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+        </select>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="city">City</label>
+            <input class="form-control" type="text" id="city" name="campground[city]" >
+        </div>
+       <div class="mb-3" id="sub_category_div">
+        <label class="form-label" for="state">State/Province</label>
+        <input class="form-control" type="text" id="state" name="campground[state]" require>
+    </div>
+        <div class="mb-1">
+            <label class="form-label" for="dump_station">Dump Station on Site?</label>
+            <input class="form-control" type="text" id="dump_station" name="campground[dump_station]" required>
+        </div>
+        <div class="mb-1">
+            <label class="form-label" for="potable_water">Potable Water on Site?</label>
+            <input class="form-control" type="text" id="potable_water" name="campground[potable_water]" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="website">Website</label>
+            <input class="form-control" type="text" id="website" name="campground[website]" required>
+        </div>
+        <div class="input-group mb-3">
+        <input type="file" name="images" id="images" multiple class="form-control">        
+        </div>
+
+        
+        <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <input type="text" class="form-control" id="description" rows="10" cols="40" name="campground[description]">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="price">Price</label>
+            <div class="input-group">
+            <span class="input-group-text" id="price-label">$</span>
+            <input type="text" class="form-control" id="price" name="campground[price]" placeholder="0.00" required>
+            </div>
+        </div>
+        
+        <button class="btn btn-success"> Add Campground</button>
+    </form>
+        </div>
+    </div>
+
+
+    

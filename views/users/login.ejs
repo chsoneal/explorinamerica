@@ -1,0 +1,14 @@
+<%- layout('../views/layouts/boilerplate.ejs') %>
+<h1>Login to ExplorinAmerica</h1>
+<form action="/login" method="POST" class="validated-form" novalidate>
+<div class="mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input class="form-control" type="text" id="username" name="username" required>
+        </div>
+<div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password" required>
+        </div>
+<button class="btn btn-success">Login</button>
+</form>
+<button class="btn btn-primary"><a class="nav-link text-white" href="/register">Sign Up</a></button>
